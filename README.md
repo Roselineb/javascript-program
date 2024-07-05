@@ -124,6 +124,207 @@ const waitAndReturn = () =>
 ```
 ## Output:
 ![ex10-async](https://github.com/Roselineb/javascript-program/assets/128909895/63ace027-047e-49d2-b0d6-96ad8f7067f3)
+# TO-DO-LIST PROJECT
+## javascript:
+```
+document.addEventListener('DOMContentLoaded', () => {
+    const addButton = document.getElementById('add-btn');
+    const todoInput = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
+    const filter = document.getElementById('filter');
+
+    addButton.addEventListener('click', addTodo);
+    todoList.addEventListener('click', handleTodoClick);
+    filter.addEventListener('change', filterTodos);
+
+    function addTodo() {
+        const todoText = todoInput.value.trim();
+        if (todoText !== '') {
+            const li = document.createElement('li');
+            li.textContent = todoText;
+            li.classList.add('todo-item');
+
+            const completeBtn = document.createElement('button');
+            completeBtn.textContent = 'Complete';
+            completeBtn.classList.add('complete-btn');
+            li.appendChild(completeBtn);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.classList.add('delete-btn');
+            li.appendChild(deleteBtn);
+
+            todoList.appendChild(li);
+            todoInput.value = '';
+        }
+    }
+
+    function handleTodoClick(e) {
+        const item = e.target;
+
+        if (item.classList[0] === 'delete-btn') {
+            item.parentElement.remove();
+        }
+
+        if (item.classList[0] === 'complete-btn') {
+            const todo = item.parentElement;
+            todo.classList.toggle('completed');
+        }
+    }
+
+    function filterTodos() {
+        const todos = todoList.childNodes;
+        todos.forEach(todo => {
+            switch (filter.value) {
+                case 'all':
+                    todo.style.display = 'flex';
+                    break;
+                case 'completed':
+                    if (todo.classList.contains('completed')) {
+                        todo.style.display = 'flex';
+                    } else {
+                        todo.style.display = 'none';
+                    }
+                    break;
+                case 'uncompleted':
+                    if (!todo.classList.contains('completed')) {
+                        todo.style.display = 'flex';
+                    } else {
+                        todo.style.display = 'none';
+                    }
+                    break;
+            }
+        });
+    }
+});
+```
+## CSS:
+```
+body {
+    font-family: Arial, sans-serif;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* .container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+} */
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-container, .filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#todo-input, #filter {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#add-btn {
+    padding: 10px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-btn:hover {
+    background-color: #218838;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #f4f4f4;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li.completed {
+    text-decoration: line-through;
+    background: #d4edda;
+}
+
+li button {
+    border: none;
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+li button:hover {
+    background: #c82333;
+}
+
+li .complete-btn {
+    background: #007bff;
+    margin-right: 5px;
+}
+
+li .complete-btn:hover {
+    background: #0069d9;
+}
+```
+## Html:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="todo-input" placeholder="Add a new task">
+            <button id="add-btn">Add</button>
+        </div>
+        <div class="filter-container">
+            <select id="filter">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="uncompleted">Uncompleted</option>
+            </select>
+        </div>
+        <ul id="todo-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+# output:
+![image](https://github.com/Roselineb/javascript-program/assets/128909895/7c7c26d9-08d8-4386-8700-19120109aad1)
+
+
+
 
 
 
